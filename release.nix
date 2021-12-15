@@ -6,7 +6,7 @@
 let
   pkgs = import <nixpkgs> { };
 in rec {
-  html-split = import ./default.nix {
+  pills = import ./default.nix {
     inherit pkgs;
 
     inherit (nix-pills) revCount shortRev;
@@ -15,7 +15,9 @@ in rec {
   release = pkgs.releaseTools.aggregate
     { name = "nix-pills-release";
       constituents =
-        [ html-split
+        [
+          pills.html-split
+          pills.epub
         ];
       meta.description = "All build outputs";
     };
